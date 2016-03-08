@@ -1,0 +1,9 @@
+[Unit]
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm --publish 9200:9200 --publish 9300:9300 --volume /home/pi/elastic-data/:/data/data elasticsearch:2.2.0
+
+[Install]
+WantedBy=multi-user.target

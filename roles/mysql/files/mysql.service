@@ -1,0 +1,9 @@
+[Unit]
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm -v /home/pi/mysql-data:/var/lib/mysql --publish 3306:3306 -e MYSQL_ROOT_PASSWORD=mysqlpw hypriot/rpi-mysql
+
+[Install]
+WantedBy=multi-user.target

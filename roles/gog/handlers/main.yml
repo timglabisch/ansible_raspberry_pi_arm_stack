@@ -1,0 +1,6 @@
+- name: reload systemd
+  sudo: yes
+  command: systemctl daemon-reload
+- name: restart gog
+  sudo: yes
+  command: systemctl restart gog

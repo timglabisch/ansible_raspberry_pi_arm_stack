@@ -1,0 +1,7 @@
+---
+- hosts: rasp
+  roles:
+    - gog
+    - elasticsearch
+    - mysql
+    - symfony

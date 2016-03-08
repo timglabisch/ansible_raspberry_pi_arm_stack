@@ -1,0 +1,2 @@
+[rasp]
+192.168.0.79 ansible_connection=ssh ansible_ssh_user=pi ansible_ssh_pass=raspberry sudo=yes

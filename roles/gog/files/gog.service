@@ -1,0 +1,10 @@
+[Unit]
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --rm --publish 8022:22 --publish 3000:3000 --volume /home/pi/gogs-data/:/data hypriot/rpi-gogs-raspbian
+
+[Install]
+WantedBy=multi-user.target
