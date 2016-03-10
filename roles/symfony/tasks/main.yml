@@ -1,3 +1,4 @@
+---
 - copy: src=Dockerfile dest=/tmp/Dockerfile
 
 - shell: cd /tmp && sudo docker build -t symfony .

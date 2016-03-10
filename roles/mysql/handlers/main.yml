@@ -1,3 +1,4 @@
+---
 - name: restart mysql
   become: true
   command: systemctl restart mysql

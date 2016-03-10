@@ -1,3 +1,4 @@
+---
 - copy: src=Dockerfile dest=/tmp/Dockerfile
 - copy: src=elasticsearch.yml dest=/tmp/elasticsearch.yml
 - copy: src=docker-entrypoint.sh dest=/tmp/docker-entrypoint.sh

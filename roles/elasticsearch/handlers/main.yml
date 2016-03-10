@@ -1,3 +1,4 @@
+---
 - name: restart elastic
   become: true
   command: systemctl restart elastic
