@@ -1,5 +1,11 @@
+# Docker based raspberry pi stack
+
+## How to use
+
 make sure that docker is running on your raspberry and you've installed ansible + sshpass
 
 modify the ip of your raspberry (./production)
 
-run ansible-playbook -i production site.yml -vvv
+Be shure, you have `docker-py`installed on yur host (`pip install docker-pi`)
+
+run `ansible-playbook -i production site.yml -vvvv` or `make ansible`
