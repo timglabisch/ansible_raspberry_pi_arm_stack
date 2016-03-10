@@ -1,9 +1,9 @@
 - name: Install unit file
-  sudo: true
+  become: true
   copy: src=mysql.service dest=/lib/systemd/system/ owner=root mode=644
   notify:
     - reload systemd
     - restart mysql
 
 - shell: systemctl enable mysql
-  sudo: yes
+  become: true

@@ -1,3 +1,3 @@
 - name: restart mysql
-  sudo: yes
+  become: true
   command: systemctl restart mysql

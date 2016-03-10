@@ -1,6 +1,6 @@
 - name: reload systemd
-  sudo: yes
+  become: true
   command: systemctl daemon-reload
 - name: restart symfony
-  sudo: yes
+  become: true
   command: systemctl restart symfony

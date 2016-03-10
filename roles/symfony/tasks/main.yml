@@ -1,13 +1,13 @@
 - copy: src=Dockerfile dest=/tmp/Dockerfile
 
 - shell: cd /tmp && sudo docker build -t symfony .
-  sudo: yes
+  become: true
 
 - name: Install unit file
-  sudo: true
+  become: true
   copy: src=symfony.service dest=/lib/systemd/system/ owner=root mode=644
   notify:
     - reload systemd
     - restart symfony
 - shell: systemctl enable symfony
-  sudo: yes
+  become: true

@@ -3,14 +3,14 @@
 - copy: src=docker-entrypoint.sh dest=/tmp/docker-entrypoint.sh
 
 - shell: cd /tmp && sudo docker build -t elasticsearch:2.2.0 .
-  sudo: yes
+  become: true
 
 - name: Install unit file
-  sudo: true
+  become: true
   copy: src=elastic.service dest=/lib/systemd/system/ owner=root mode=644
   notify:
     - reload systemd
     - restart elastic
 
 - shell: systemctl enable elastic
-  sudo: yes
+  become: true
