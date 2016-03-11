@@ -1,9 +1,23 @@
-- name: Install unit file
-  sudo: true
-  copy: src=mysql.service dest=/lib/systemd/system/ owner=root mode=644
-  notify:
-    - reload systemd
-    - restart mysql
+---
+- name: ensure mysql docker container is running
+  become: true
+  docker:
+    name: mysql
+    image: hypriot/rpi-mysql
+    state: started
+    ports:
+    - "3306:3306"
+    env:
+      MYSQL_ROOT_PASSWORD=mysqlpw
+    volumes:
+    - "/home/pi/mysql-data:/var/lib/mysql"
+    # there should be a nicer way. (fetching docker client version and use it here)
+    docker_api_version: "1.20" # do not delete the quotes!
 
-- shell: systemctl enable mysql
-  sudo: yes
+
+
+#ExecStart=/usr/bin/docker run --rm  \
+#-v /home/pi/mysql-data:/var/lib/mysql \
+#--publish 3306:3306 \
+#-e MYSQL_ROOT_PASSWORD=mysqlpw \
+#hypriot/rpi-mysql

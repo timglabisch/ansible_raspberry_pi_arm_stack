@@ -1,0 +1,48 @@
+---
+- name: check, if docker is installed
+  # no idea, why this does not work with command module
+  shell: type docker
+  ignore_errors: true
+  register: docker_install_state
+
+## usefull for debugging
+#- name: print out docker_install_state
+#  debug: var=docker_install_state
+
+- block:
+    - name: download docker deb file
+      get_url: 
+        url: http://downloads.hypriot.com/docker-hypriot_1.8.1-1_armhf.deb
+        dest: /tmp/docker-hypriot_1.8.1-1_armhf.deb
+
+    - name: install docker
+      become: true
+      apt:
+        deb: /tmp/docker-hypriot_1.8.1-1_armhf.deb
+  rescue:
+    - name: remove possible broken docker deb file
+      file:
+        name: /tmp/docker-hypriot_1.8.1-1_armhf.deb
+        state: absent
+  when: docker_install_state.rc > 0
+
+- name: install pip
+  become: true
+  easy_install: 
+    name: pip 
+    state: latest
+
+- name: install docker-py
+  become: true
+  pip:
+    name: docker-py
+    state: latest
+
+- name: ensure docker service is running
+  service:
+    name: docker
+    enabled: true
+    state: started
+
+# todo: check, if we need this
+#$ sudo sh -c 'usermod -aG docker $SUDO_USER'

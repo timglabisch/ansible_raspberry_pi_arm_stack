@@ -1,8 +1,10 @@
+---
 - name: Install unit file
-  sudo: true
+  become: true
   copy: src=gog.service dest=/lib/systemd/system/ owner=root mode=644
   notify:
     - reload systemd
     - restart gog
+
 - shell: systemctl enable gog
-  sudo: yes
+  become: true
